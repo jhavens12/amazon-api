@@ -15,7 +15,6 @@ wishlist_1 = "3C4OZASG6ZZ4R"
 amazon = AmazonAPI(credentials.access_key, credentials.secret_key, credentials.ass_tag)
 client = Client(push_credentials.push_user, api_token=push_credentials.push_token)
 
-
 def money_format(money):
     return str('${:,.2f}'.format(float(money)))
 
@@ -43,7 +42,6 @@ def get_wishlist(wishlist_id):
         timestamp = datetime.now()
         wish_list_dict[item.a_uuid] = {}
         wish_list_dict[item.a_uuid]['pricing_data'] = {}
-        #wish_list_dict[n] = {} #create dict with ASIN as ID
         wish_list_dict[item.a_uuid]['ASIN'] = item.a_uuid
         wish_list_dict[item.a_uuid]['title'] = item.title
         wish_list_dict[item.a_uuid]['current_price'] = item.price
@@ -51,7 +49,6 @@ def get_wishlist(wishlist_id):
         wish_list_dict[item.a_uuid]['source'] = item.source
         wish_list_dict[item.a_uuid]['url'] = item.url
         wish_list_dict[item.a_uuid]['timestamp'] = datetime.now()
-        #wish_list.append(str(item.a_uuid))
 
     return wish_list_dict
 

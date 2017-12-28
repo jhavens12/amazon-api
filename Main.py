@@ -136,4 +136,5 @@ pickle_out = open("price_details.dict","wb")
 pickle.dump(price_details, pickle_out)
 pickle_out.close()
 
-print("done")
+timestamp = datetime.now()
+print(str(timestamp)+" done")

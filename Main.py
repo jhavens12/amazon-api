@@ -1,4 +1,4 @@
-from amazon.api import AmazonAPI
+#from amazon.api import AmazonAPI
 import credentials
 import push_credentials
 from pprint import pprint
@@ -12,7 +12,7 @@ from pushover import Client
 wishlist_1 = "3C4OZASG6ZZ4R"
 
 #authenticate
-amazon = AmazonAPI(credentials.access_key, credentials.secret_key, credentials.ass_tag)
+#amazon = AmazonAPI(credentials.access_key, credentials.secret_key, credentials.ass_tag)
 client = Client(push_credentials.push_user, api_token=push_credentials.push_token)
 
 def money_format(money):

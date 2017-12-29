@@ -84,27 +84,56 @@ def compare_pricing(current_wishlist,price_details):
                     time_delta = timestamp - price_details[historical_item]['timestamp'] #calculate time since change
                     price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']  #calculate price change
                     percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
+                    percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
 
-                    price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
-                    price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
-                    price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+                    if percent_delta_float > 4: #if price change is greater than a dollar
 
-                    send_message("AMAZON INCREASE",time_delta,price_delta,percent_delta,price_details[historical_item])
-                    print("Price has gone up on "+current_wishlist[current_item]['ASIN'])
+                        if price_details[historical_item]['current_price'] == 0: #if price is up from 0 - back in stock
+                            #item is back in stock
+
+                            price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
+                            price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
+                            price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+
+                            send_message("BACK IN STOCK",time_delta,price_delta,percent_delta,price_details[historical_item])
+                            print("Price has gone up on "+current_wishlist[current_item]['ASIN'])
+
+                        else: #if old price was anything but 0 (not indicating that product is out of stock)
+
+                            price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
+                            price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
+                            price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+
+                            send_message("AMAZON INCREASE",time_delta,price_delta,percent_delta,price_details[historical_item])
+                            print("Price has gone up on "+current_wishlist[current_item]['ASIN'])
 
                 if current_wishlist[current_item]['current_price'] < price_details[historical_item]['current_price']:
                     #PRICE DECREASE
                     timestamp = datetime.now() #new timestamp
                     time_delta = timestamp - price_details[historical_item]['timestamp'] #calculate time since change
-                    price_delta = price_details[historical_item]['current_price'] - current_wishlist[current_item]['current_price']#calculate price change
+                    price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']#calculate price change
                     percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
+                    percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
 
-                    price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
-                    price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
-                    price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+                    if percent_delta_float < -4: #if delta is lower than -1 (more of a discount would be -2)
 
-                    send_message("AMAZON DECREASE",time_delta,price_delta,percent_delta,price_details[historical_item])
-                    print("price has gone down on "+current_wishlist[current_item]['ASIN'])
+                        if current_wishlist[current_item]['current_price'] == 0: #if product has dropped to 0
+
+                            price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
+                            price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
+                            price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+
+                            send_message("OUT OF STOCK",time_delta,price_delta,percent_delta,price_details[historical_item])
+                            print("price has gone down on "+current_wishlist[current_item]['ASIN'])
+
+                        else: # if decrease is a normal drop
+
+                            price_details[historical_item]['pricing_data'][timestamp] = current_wishlist[current_item]['current_price'] #document time
+                            price_details[historical_item]['current_price'] = current_wishlist[current_item]['current_price'] #set current_price key
+                            price_details[historical_item]['timestamp'] = timestamp #set timestamp key
+
+                            send_message("AMAZON DECREASE",time_delta,price_delta,percent_delta,price_details[historical_item])
+                            print("price has gone down on "+current_wishlist[current_item]['ASIN'])
 
                 if current_wishlist[current_item]['current_price'] == price_details[historical_item]['current_price']:
                     #NO PRICE CHANGE

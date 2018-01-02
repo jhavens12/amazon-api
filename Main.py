@@ -28,11 +28,22 @@ def t_delta(duration):
     if duration == 0:
         return str(0)
     else:
-        days, seconds = duration.days, duration.seconds
-        hours = days * 24 + seconds // 3600
-        minutes = (seconds % 3600) // 60
-        seconds = seconds % 60
-        return str(hours)+":"+str(minutes)+":"+str(seconds)
+        # seconds = duration.seconds
+        # hours = days * 24 + seconds // 3600
+        # minutes = (seconds % 3600) // 60
+        # seconds = seconds % 60
+        # return str(hours)+":"+str(minutes)+":"+str(seconds)
+        s = duration.seconds
+        hours = s // 3600
+        # remaining seconds
+        s = s - (hours * 3600)
+        # minutes
+        minutes = s // 60
+        # remaining seconds
+        seconds = s - (minutes * 60)
+        # total time
+        return '%s:%s:%s' % (hours, minutes, seconds)
+        # result: 3:43:40
 
 def get_wishlist(wishlist_id):
     #return list of strings
@@ -117,7 +128,7 @@ def compare_pricing(current_wishlist,price_details):
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
                     print("PERCENT DELTA FLOAT")
                     print(percent_delta_float)
-                    
+
                     if percent_delta_float < -4: #if delta is lower than -1 (more of a discount would be -2)
 
                         if current_wishlist[current_item]['current_price'] == 0: #if product has dropped to 0

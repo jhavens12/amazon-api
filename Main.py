@@ -85,7 +85,8 @@ def compare_pricing(current_wishlist,price_details):
                     price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']  #calculate price change
                     percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
-
+                    print("PERCENT DELTA FLOAT")
+                    print(percent_delta_float)
                     if percent_delta_float > 4: #if price change is greater than a dollar
 
                         if price_details[historical_item]['current_price'] == 0: #if price is up from 0 - back in stock
@@ -114,7 +115,9 @@ def compare_pricing(current_wishlist,price_details):
                     price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']#calculate price change
                     percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
-
+                    print("PERCENT DELTA FLOAT")
+                    print(percent_delta_float)
+                    
                     if percent_delta_float < -4: #if delta is lower than -1 (more of a discount would be -2)
 
                         if current_wishlist[current_item]['current_price'] == 0: #if product has dropped to 0

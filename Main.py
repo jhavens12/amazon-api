@@ -98,6 +98,15 @@ def compare_pricing(current_wishlist,price_details):
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
                     print("PERCENT DELTA FLOAT")
                     print(percent_delta_float)
+                    print("PRICE_DELTA")
+                    print(price_delta)
+                    print("PERCENT_DELTA")
+                    print(percent_delta)
+                    print("OLD PRICE")
+                    print(price_details[historical_item]['current_price'])
+                    print("NEW PRICE")
+                    print(current_wishlist[current_item]['current_price'])
+
                     if percent_delta_float > 4: #if price change is greater than a dollar
 
                         if price_details[historical_item]['current_price'] == 0: #if price is up from 0 - back in stock
@@ -128,6 +137,14 @@ def compare_pricing(current_wishlist,price_details):
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
                     print("PERCENT DELTA FLOAT")
                     print(percent_delta_float)
+                    print("PRICE_DELTA")
+                    print(price_delta)
+                    print("PERCENT_DELTA")
+                    print(percent_delta)
+                    print("OLD PRICE")
+                    print(price_details[historical_item]['current_price'])
+                    print("NEW PRICE")
+                    print(current_wishlist[current_item]['current_price'])
 
                     if percent_delta_float < -4: #if delta is lower than -1 (more of a discount would be -2)
 
@@ -181,3 +198,4 @@ pickle_out.close()
 
 timestamp = datetime.now()
 print(str(timestamp)+" done")
+print()

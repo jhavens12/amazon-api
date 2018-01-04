@@ -75,7 +75,6 @@ def send_message(status,time_delta,price_delta,percent_delta,item_dictionary):
     "\nLink: "+item_dictionary['url']
 
     print("Message: "+message)
-    print()
     client.send_message(message, title=status)
 
 def compare_pricing(current_wishlist,price_details):
@@ -96,7 +95,7 @@ def compare_pricing(current_wishlist,price_details):
                     price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']  #calculate price change
                     #percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
-                    percent_delta = str("{0:.0f}%".format(percent_delta_float)))
+                    percent_delta = str("{0:.0f}%".format(percent_delta_float))
                     print("PERCENT DELTA FLOAT")
                     print(percent_delta_float)
                     print("PRICE_DELTA")
@@ -136,7 +135,7 @@ def compare_pricing(current_wishlist,price_details):
                     price_delta = current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price']#calculate price change
                     #percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
-                    percent_delta = str("{0:.0f}%".format(percent_delta_float)))
+                    percent_delta = str("{0:.0f}%".format(percent_delta_float))
                     print("PERCENT DELTA FLOAT")
                     print(percent_delta_float)
                     print("PRICE_DELTA")
@@ -172,7 +171,7 @@ def compare_pricing(current_wishlist,price_details):
                     #NO PRICE CHANGE
                     #percent_delta = percent_format(current_wishlist[current_item]['current_price'], price_details[historical_item]['current_price'])
                     percent_delta_float = ((current_wishlist[current_item]['current_price'] - price_details[historical_item]['current_price'])/price_details[historical_item]['current_price'])*100
-                    percent_delta = str("{0:.0f}%".format(percent_delta_float)))
+                    percent_delta = str("{0:.0f}%".format(percent_delta_float))
                     #print("price has not changed on "+current_wishlist[current_item]['ASIN'])
                     #send_message("SAME",0,0,percent_delta,price_details[historical_item])
 
